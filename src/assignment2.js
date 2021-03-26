@@ -1,6 +1,7 @@
 var readlineSync = require('readline-sync');
+var studentArray = [];
 
-function student(name, dateOfBirth, address, modulesTaken) {
+function students(name, dateOfBirth, address, modulesTaken) {
     this.name = name,
     this.dateOfBirth = dateOfBirth,
     this.address = address,
@@ -48,11 +49,47 @@ function addOrRemove() {
 }
 
 function addStudent() {
-    console.log("Function to add a student");
+    var addAnother;
+    do {
+        console.log("\n" + "Please provide the following information:");
+        var name = readlineSync.question("Name: ");
+        var dateOfBirth = readlineSync.question("Date of Birth (dd/mm/yyyy): ");
+        var address = readlineSync.question("Address: ");
+        var modulesTaken = validateModules();
+
+        var student = new students(name, dateOfBirth, address, modulesTaken);
+        console.log("\n" + "Student Successfully Added.")
+        studentArray.push(student);
+
+        do {
+            addAnother = readlineSync.question("Do you want to add another student? (y/n): ")
+            var valid = ((addAnother === 'y') || (addAnother === 'Y') || (addAnother === 'n') || (addAnother === 'N'));
+
+            if (!valid) {
+                console.log("Incorrect selection. Please try again");
+            }
+        } while (!valid);
+    } while ((addAnother === 'y') || (addAnother === 'Y'));
 }
 
 function removeStudent() {
     console.log("Function to remove a student");
+}
+
+function validateModules() {
+    var valid = false;
+    do {
+        var modulesTaken = Number(readlineSync.question("Number of Modules you are taking (4 max): "));
+
+        if (modulesTaken > 4) {
+            valid = true;
+            console.log("\n" + "The max number of modules that can be taken is 4. Please try again.");
+        } else {
+            valid = false;
+        }
+    } while (valid);
+
+    return modulesTaken;
 }
 
 function displayCourseDetails() {
