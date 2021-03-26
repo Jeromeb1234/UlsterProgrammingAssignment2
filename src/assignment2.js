@@ -50,6 +50,7 @@ function addOrRemove() {
 
 function addStudent() {
     console.log("Function to add a student");
+
     var addAnother;
     do {
         console.log("\n" + "Please provide the following information:");
@@ -108,6 +109,22 @@ function removeStudent() {
     var spliceNumber = studentNumber -1;
     studentArray.splice(spliceNumber, 1);
     return studentArr;
+}
+
+function validateModules() {
+    var valid = false;
+    do {
+        var modulesTaken = Number(readlineSync.question("Number of Modules you are taking (4 max): "));
+
+        if (modulesTaken > 4) {
+            valid = true;
+            console.log("\n" + "The max number of modules that can be taken is 4. Please try again.");
+        } else {
+            valid = false;
+        }
+    } while (valid);
+
+    return modulesTaken;
 }
 
 function displayCourseDetails() {
