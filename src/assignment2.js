@@ -234,6 +234,48 @@ function returnToMain() {
 
 function writeToFile() {
     console.log("Function to write information to text files");
+    var fs = require('fs');
+
+    let contentToWriteToFile = '';
+    for (var i = 0; i < studentArray.length; i++) {
+
+        // let currentName = studentArray[i].name;
+        // let currentDateOfBirth = studentArray[i].dateOfBirth;
+        // let currentAddress = studentArray[i].address;
+        // let currentModulesTaken = studentArray[i].modulesTaken.toString();
+        let fileEntry =
+            studentArray[i].name +
+            ', ' +
+            studentArray[i].dateOfBirth +
+            ', ' +
+            studentArray[i].address +
+            ', ' +
+            studentArray[i].modulesTaken.toString() +
+            '\n';
+        contentToWriteToFile += fileEntry;
+        // fs.writeFile('TestFile.txt', currentDateOfBirth, function (err) {
+        //     if(err) console.log(err);
+        //     else console.log('Write operation complete.')
+        // });
+        // fs.writeFile('TestFile.txt', currentAddress, function (err) {
+        //     if(err) console.log(err);
+        //     else console.log('Write operation complete.')
+        // });
+        // fs.writeFile('TestFile.txt', currentModulesTaken, function (err) {
+        //     if(err) console.log(err);
+        //     else console.log('Write operation complete.')
+        // });
+
+    }
+
+    fs.writeFile(
+        'TestFile.txt',
+        contentToWriteToFile,
+        function (err) {
+            if(err) console.log(err);
+            else console.log('Write operation complete.');
+        }
+    );
 }
 
 main();
