@@ -293,4 +293,8 @@ function writeToFile() {
     );
 }
 
+function readFile() {
+    
+}
+
 main();
