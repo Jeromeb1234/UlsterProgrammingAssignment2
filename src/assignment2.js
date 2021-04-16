@@ -235,6 +235,16 @@ function returnToMain() {
 function writeToFile() {
     var fs = require('fs');
 
+    oneModule = studentArray.filter(x => x.modulesTaken === 1).length;
+    twoModules = studentArray.filter(x => x.modulesTaken === 2).length;
+    threeModules = studentArray.filter(x => x.modulesTaken === 3).length;
+    fourModules = studentArray.filter(x => x.modulesTaken === 4).length;
+
+    oneModulePercentage = (oneModule/studentArray.length) * 100 + '%';
+    twoModulesPercentage = (twoModules/studentArray.length) * 100 + '%';
+    threeModulesPercentage = (threeModules/studentArray.length) * 100 + '%';
+    fourModulesPercentage = (fourModules/studentArray.length) * 100 + '%';
+
     let studentFile = '';
     for (var i = 0; i < studentArray.length; i++) {
         
@@ -254,9 +264,15 @@ function writeToFile() {
                      '\n' +
                      'Course Directors Name: Claire McCann' +
                      '\n' +
-                     'Total number of students: ' + studentArray.length
+                     'Total number of students: ' + studentArray.length +
                      '\n' +
-                     
+                     'Percentage of students taking one module: ' + oneModulePercentage +
+                     '\n' +
+                     'Percentage of students taking two modules: ' + twoModulesPercentage +
+                     '\n' +
+                     'Percentage of students taking three modules: ' + threeModulesPercentage +
+                     '\n' +
+                     'Percentage of students taking four modules: ' + fourModulesPercentage
 
     fs.writeFile (
         'StudentDetails.txt',
@@ -275,6 +291,10 @@ function writeToFile() {
             else console.log('Course write operation complete.');
         }
     );
+}
+
+function readFile() {
+    
 }
 
 main();
