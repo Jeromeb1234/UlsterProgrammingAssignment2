@@ -1,0 +1,2 @@
+cwe, cew, ew, 4
+cew, wec, wec, 3

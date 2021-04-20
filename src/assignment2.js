@@ -294,7 +294,24 @@ function writeToFile() {
 }
 
 function readFile() {
+    var fs = require('fs');
     
+    try { var data = fs.readFileSync('./StudentDetails.txt', 'utf8');
+    console.log(data); } catch(e) { console.log('Error:', e.stack); }
+    
+    var lines = data.split('\n')
+    for (line = 0; line < lines.length; line++) {
+        currentLine = lines[line];
+        lineContent = currentLine.split(',')
+
+        studentObject = new students;
+        studentObject.name = lineContent[0];
+        studentObject.dateOfBirth = lineContent[1];
+        studentObject.address = lineContent [2];
+        studentObject.modulesTaken = lineContent[3];
+        studentArray.push(studentObject);
+    }
 }
 
+readFile();
 main();
