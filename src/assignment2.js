@@ -332,11 +332,11 @@ function writeToFile() {
         
         let studentFileEntry =
             studentArray[i].name +
-            ', ' +
+            ',' +
             studentArray[i].dateOfBirth +
-            ', ' +
+            ',' +
             studentArray[i].address +
-            ', ' +
+            ',' +
             studentArray[i].modulesTaken.toString() +
             '\n';
         studentFile += studentFileEntry;
@@ -380,21 +380,31 @@ function writeToFile() {
 
 //function to read student data from txt file and store it in the array again
 function readFile() {
-    try { var data = fs.readFileSync('./StudentDetails.txt', 'utf8');
-    console.log(data); } catch(e) { console.log('Error:', e.stack); }
-    
-    var lines = data.split('\n')
-    for (line = 0; line < lines.length; line++) {
-        currentLine = lines[line];
-        lineContent = currentLine.split(',')
 
-        studentObject = new students;
-        studentObject.name = lineContent[0];
-        studentObject.dateOfBirth = lineContent[1];
-        studentObject.address = lineContent [2];
-        studentObject.modulesTaken = lineContent[3];
-        studentArray.push(studentObject);
-    }
+    if (fs.existsSync('./StudentDetails.txt')) {
+        console.log('\n' + 'File found, running program.');
+
+        try { 
+            var data = fs.readFileSync('./StudentDetails.txt', 'utf8');
+        } catch(e) { 
+            console.log('Error:', e.stack);
+        }
+    
+        var lines = data.split('\n')
+        for (line = 0; line < lines.length; line++) {
+            currentLine = lines[line];
+            lineContent = currentLine.split(',')
+
+            studentObject = new students;
+            studentObject.name = lineContent[0];
+            studentObject.dateOfBirth = lineContent[1];
+            studentObject.address = lineContent [2];
+            studentObject.modulesTaken = lineContent[3];
+            studentArray.push(studentObject);
+        }
+    } else {
+        console.log('\n' + 'File not found, running program.');
+    };
 }//end of function
 
 //calling the read file function
