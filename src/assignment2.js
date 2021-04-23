@@ -112,6 +112,8 @@ function validateName() {
         }
     } while (valid);
 
+    name = name.toLowerCase();
+
     return name;
 }//end of function
 
@@ -192,6 +194,7 @@ function removeStudent() {
 
             //do-while loop to provide user the option to remove another student
             do {
+                console.log('\n' + 'Student Removed!')
                 removeAnother = readlineSync.question('Do you want to remove another student? (y/n): ')
                 var validInput = ((removeAnother === 'y') || (removeAnother === 'Y') || (removeAnother === 'n') || (removeAnother === 'N'));
 
@@ -260,6 +263,7 @@ function searchForStudent() {
             do {
                 var found = false;
                 var searchedStudent = readlineSync.question('\n' + 'Enter the students name you want to search for: ');
+                searchedStudent = searchedStudent.toLowerCase();
                 
                 //search the array for the name of the student that the user wants to search for and display details if found
                 for (var i = 0; i < studentArray.length; i++) {
@@ -360,7 +364,7 @@ function writeToFile() {
     //fs function to write the student data to txt file
     fs.writeFile (
         'StudentDetails.txt',
-        studentFile,
+        studentFile.trim(),
         function (err) {
             if (err) console.log(err);
             else console.log('\n' + 'Student write operation complete.');
@@ -381,6 +385,7 @@ function writeToFile() {
 //function to read student data from txt file and store it in the array again
 function readFile() {
 
+    //check to see if the file exists
     if (fs.existsSync('./StudentDetails.txt')) {
         console.log('\n' + 'File found, running program.');
 
@@ -399,7 +404,7 @@ function readFile() {
             studentObject.name = lineContent[0];
             studentObject.dateOfBirth = lineContent[1];
             studentObject.address = lineContent [2];
-            studentObject.modulesTaken = lineContent[3];
+            studentObject.modulesTaken = parseInt(lineContent[3]);
             studentArray.push(studentObject);
         }
     } else {
